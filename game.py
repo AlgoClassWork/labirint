@@ -16,7 +16,12 @@ class GameSprite():
         self.speed = speed
         self.image = transform.scale(image.load(img), (width, height))
 
+    def show(self):
+        window.blit(self.image, (self.cord_x, self.cord_y))
+
 player = GameSprite(x=0, y=400, width=100, height=100, speed=5, img='player.png')
+enemy = GameSprite(x=600, y=200, width=100, height=100, speed=5, img='enemy.png')
+goal = GameSprite(x=600, y=400, width=100, height=100, speed=5, img='goal.png')
 
 # ИГРОВОЙ ЦИКЛ
 while True:
@@ -26,6 +31,8 @@ while True:
             exit()
     # Отображение картинок
     window.blit(background, (0, 0))
-    window.blit(player.image, (player.cord_x, player.cord_y))
+    player.show()
+    enemy.show()
+    goal.show()
     # Обновление кадров
     display.update()

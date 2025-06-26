@@ -23,6 +23,8 @@ player = GameSprite(x=0, y=400, width=100, height=100, speed=5, img='player.png'
 enemy = GameSprite(x=600, y=200, width=100, height=100, speed=5, img='enemy.png')
 goal = GameSprite(x=600, y=400, width=100, height=100, speed=5, img='goal.png')
 
+wall = GameSprite(x=100, y=100, width=20, height=300, speed=0 , img='wall.png')
+
 # ИГРОВОЙ ЦИКЛ
 while True:
     # Обработка нажатия на крестик
@@ -34,5 +36,6 @@ while True:
     player.show()
     enemy.show()
     goal.show()
+    wall.show()
     # Обновление кадров
     display.update()

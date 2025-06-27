@@ -14,16 +14,17 @@ background = transform.scale(image.load(WINDOW_BACKGROUND), (WINDOW_WIDTH, WINDO
 clock = time.Clock()
 
 # -------------------- КЛАССЫ --------------------
-class GameSprite:
+class GameSprite(sprite.Sprite):
     def __init__(self, x, y, width, height, speed, img_path):
-        self.cord_x = x
-        self.cord_y = y
+        super().__init__()
         self.speed = speed
         self.image = transform.scale(image.load(img_path), (width, height))
-        self.rect = self.image.get_rect(topleft=(x, y))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
     def show(self):
-        window.blit(self.image, (self.cord_x, self.cord_y))
+        window.blit(self.image, (self.rect.x, self.rect.y))
 
 # -------------------- СОЗДАНИЕ СПРАЙТОВ --------------------
 player = GameSprite(x=20, y=400, width=50, height=50, speed=5, img_path='player.png')
@@ -59,14 +60,14 @@ while True:
 
     # Движение обьектов
     keys = key.get_pressed()
-    if keys[K_w] and player.cord_y > 0:
-        player.cord_y -= player.speed
-    if keys[K_s] and player.cord_y < 450:
-        player.cord_y += player.speed
-    if keys[K_a] and player.cord_x > 0:
-        player.cord_x -= player.speed
-    if keys[K_d] and player.cord_x < 650:
-        player.cord_x += player.speed
+    if keys[K_w] and player.rect.y > 0:
+        player.rect.y -= player.speed
+    if keys[K_s] and player.rect.y < 450:
+        player.rect.y += player.speed
+    if keys[K_a] and player.rect.x > 0:
+        player.rect.x -= player.speed
+    if keys[K_d] and player.rect.x < 650:
+        player.rect.x += player.speed
 
     # Обновление экрана
     display.update()

@@ -6,6 +6,7 @@ WINDOW_WIDTH = 700
 WINDOW_HEIGHT = 500
 WINDOW_BACKGROUND = 'background.jpg'
 
+FPS = 100
 # -------------------- ИНИЦИАЛИЗАЦИЯ ЭКРАНА --------------------
 window = display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 display.set_caption(WINDOW_TITLE)
@@ -56,6 +57,18 @@ while True:
     for wall in walls:
         wall.show()
 
+    # Движение обьектов
+    keys = key.get_pressed()
+    if keys[K_w] and player.cord_y > 0:
+        player.cord_y -= player.speed
+    if keys[K_s] and player.cord_y < 450:
+        player.cord_y += player.speed
+    if keys[K_a] and player.cord_x > 0:
+        player.cord_x -= player.speed
+    if keys[K_d] and player.cord_x < 650:
+        player.cord_x += player.speed
+
     # Обновление экрана
     display.update()
+    clock.tick(FPS)
 

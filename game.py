@@ -7,6 +7,10 @@ WINDOW_HEIGHT = 500
 WINDOW_BACKGROUND = 'background.jpg'
 
 FPS = 100
+
+font.init()
+my_font = font.Font(None, 100)
+collide_text =  my_font.render('Столкнулся', 0, (255,255,255))
 # -------------------- ИНИЦИАЛИЗАЦИЯ ЭКРАНА --------------------
 window = display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 display.set_caption(WINDOW_TITLE)
@@ -62,6 +66,8 @@ while True:
 
     # Отображение фона
     window.blit(background, (0, 0))
+    if sprite.collide_rect(player, enemy):
+        window.blit(collide_text, (100, 100))
 
     # Отображение объектов
     player.show()
@@ -74,6 +80,8 @@ while True:
     player.move()
 
     # Проверка столкновений
+
+
     for wall in walls:
         if sprite.collide_rect(player, wall):
             player.rect.x = 50

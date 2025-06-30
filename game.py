@@ -11,7 +11,8 @@ finish = False
 
 font.init()
 my_font = font.Font(None, 150)
-collide_text = my_font.render('Поражение', 0, (255, 0, 0))
+lose_text = my_font.render('Поражение', 0, (255, 0, 0))
+win_text = my_font.render('Победа', 0, (0, 255, 0))
 # -------------------- ИНИЦИАЛИЗАЦИЯ ЭКРАНА --------------------
 window = display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 display.set_caption(WINDOW_TITLE)
@@ -92,7 +93,11 @@ while True:
             player.rect.y = 400
 
     if sprite.collide_rect(player, enemy):
-        window.blit(collide_text, (50, 200))
+        window.blit(lose_text, (50, 200))
+        finish = True
+
+    if sprite.collide_rect(player, goal):
+        window.blit(win_text, (150, 200))
         finish = True
 
     # Обновление экрана

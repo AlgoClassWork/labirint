@@ -23,6 +23,7 @@ clock = time.Clock()
 class GameSprite(sprite.Sprite):
     def __init__(self, x, y, width, height, speed, img_path):
         super().__init__()
+        self.side = 'left'
         self.speed = speed
         self.image = transform.scale(image.load(img_path), (width, height))
         self.rect = self.image.get_rect()
@@ -41,6 +42,17 @@ class GameSprite(sprite.Sprite):
         if keys[K_a] and self.rect.x > 0:
             self.rect.x -= self.speed
         if keys[K_d] and self.rect.x < 650:
+            self.rect.x += self.speed
+
+    def auto_move(self, a, b):
+        if self.rect.x <= a:
+            self.side = 'right'
+        if self.rect.x >= b:
+            self.side = 'left'
+        
+        if self.side == 'left':
+            self.rect.x -= self.speed
+        else:
             self.rect.x += self.speed
 
 # -------------------- СОЗДАНИЕ СПРАЙТОВ --------------------
@@ -84,6 +96,7 @@ while True:
 
         # Движение обьектов
         player.move()
+        enemy.auto_move(50, 650)
 
     # Проверка столкновений
 

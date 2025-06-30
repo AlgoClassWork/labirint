@@ -45,6 +45,9 @@ class GameSprite(sprite.Sprite):
             self.rect.x += self.speed
 
     def auto_move(self, a, b):
+        if a > b:
+            a, b = b, a
+
         if self.rect.x <= a:
             self.side = 'right'
         if self.rect.x >= b:
@@ -96,7 +99,7 @@ while True:
 
         # Движение обьектов
         player.move()
-        enemy.auto_move(50, 650)
+        enemy.auto_move(650, 50)
 
     # Проверка столкновений
 
